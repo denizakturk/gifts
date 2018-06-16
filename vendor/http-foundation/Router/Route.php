@@ -26,6 +26,13 @@ class Route
      */
     protected $segments;
 
+    /**
+     * @var string
+     */
+    protected $view;
+
+    protected $viewTemplate;
+
     public function __construct($requestUri, $parameters)
     {
         $this->requestUri = $requestUri;
@@ -34,6 +41,24 @@ class Route
         $this->action = $parameters['action'];
         $this->parameters = $this->resolveParameters($requestUri);
         $this->segments = $this->resolveSegments($requestUri);
+        if (!empty($parameters['view'])) {
+            $this->view = $parameters['view'];
+        }
+
+        if(!empty($parameters['viewTemplate'])){
+            $this->viewTemplate = $parameters['viewTemplate'];
+        }
+    }
+
+    protected function possibleViewPath()
+    {
+        if (empty($this->getController()) || empty($this->getAction())) {
+            return '';
+        }
+        $className = str_ireplace('controller', '', strtolower(end(explode('\\', $this->getController()))));
+        $methodName = $this->getAction();
+
+        return $className.'/'.$methodName;
     }
 
     protected function resolveParameters($requestUri)
@@ -125,4 +150,21 @@ class Route
     {
         return $this->segments;
     }
+
+    /**
+     * @return string
+     */
+    public function getView(): string
+    {
+        return (!empty($this->view) ? $this->view : $this->possibleViewPath());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViewTemplate()
+    {
+        return $this->viewTemplate;
+    }
+
 }

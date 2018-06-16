@@ -6,6 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Gifts\\Database\\Connection' => $vendorDir . '/database/Connection.php',
+    'Gifts\\Database\\ConnectionInterface' => $vendorDir . '/database/ConnectionInterface.php',
+    'Gifts\\Database\\EntityManager' => $vendorDir . '/database/EntityManager.php',
+    'Gifts\\Database\\RepositoryTrait' => $vendorDir . '/database/RepositoryTrait.php',
+    'Gifts\\DependencyInjection\\Container' => $vendorDir . '/dependency-injection/Container.php',
     'Gifts\\HttpFoundation\\ControllerResolver' => $vendorDir . '/http-foundation/ControllerResolver.php',
     'Gifts\\HttpFoundation\\Exception\\RouteNotFoundException' => $vendorDir . '/http-foundation/Exception/RouteNotFoundException.php',
     'Gifts\\HttpFoundation\\ParameterBag' => $vendorDir . '/http-foundation/ParameterBag.php',
@@ -13,4 +18,7 @@ return array(
     'Gifts\\HttpFoundation\\Router\\Route' => $vendorDir . '/http-foundation/Router/Route.php',
     'Gifts\\HttpFoundation\\Router\\RouteCollection' => $vendorDir . '/http-foundation/Router/RouteCollection.php',
     'Gifts\\HttpFoundation\\ServerBag' => $vendorDir . '/http-foundation/ServerBag.php',
+    'Gifts\\Security\\Token' => $vendorDir . '/security/Token.php',
+    'Gifts\\Security\\User' => $vendorDir . '/security/User.php',
+    'Gifts\\Template\\Render' => $vendorDir . '/template/Render.php',
 );

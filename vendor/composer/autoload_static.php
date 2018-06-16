@@ -25,6 +25,11 @@ class ComposerStaticInit543416e3e5e8d5c145661fd6abb9cc6d
     );
 
     public static $classMap = array (
+        'Gifts\\Database\\Connection' => __DIR__ . '/..' . '/database/Connection.php',
+        'Gifts\\Database\\ConnectionInterface' => __DIR__ . '/..' . '/database/ConnectionInterface.php',
+        'Gifts\\Database\\EntityManager' => __DIR__ . '/..' . '/database/EntityManager.php',
+        'Gifts\\Database\\RepositoryTrait' => __DIR__ . '/..' . '/database/RepositoryTrait.php',
+        'Gifts\\DependencyInjection\\Container' => __DIR__ . '/..' . '/dependency-injection/Container.php',
         'Gifts\\HttpFoundation\\ControllerResolver' => __DIR__ . '/..' . '/http-foundation/ControllerResolver.php',
         'Gifts\\HttpFoundation\\Exception\\RouteNotFoundException' => __DIR__ . '/..' . '/http-foundation/Exception/RouteNotFoundException.php',
         'Gifts\\HttpFoundation\\ParameterBag' => __DIR__ . '/..' . '/http-foundation/ParameterBag.php',
@@ -32,6 +37,9 @@ class ComposerStaticInit543416e3e5e8d5c145661fd6abb9cc6d
         'Gifts\\HttpFoundation\\Router\\Route' => __DIR__ . '/..' . '/http-foundation/Router/Route.php',
         'Gifts\\HttpFoundation\\Router\\RouteCollection' => __DIR__ . '/..' . '/http-foundation/Router/RouteCollection.php',
         'Gifts\\HttpFoundation\\ServerBag' => __DIR__ . '/..' . '/http-foundation/ServerBag.php',
+        'Gifts\\Security\\Token' => __DIR__ . '/..' . '/security/Token.php',
+        'Gifts\\Security\\User' => __DIR__ . '/..' . '/security/User.php',
+        'Gifts\\Template\\Render' => __DIR__ . '/..' . '/template/Render.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

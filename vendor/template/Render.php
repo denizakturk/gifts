@@ -9,20 +9,32 @@ class Render
 
     protected $ext = '.php';
 
+    public $templateName = 'base';
+
     public function __construct()
     {
         $this->templateDir = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR;
     }
 
-    function render($templateName, $parameters)
+    public function viewExists($viewPath)
     {
-        ob_start();
-        if (is_array($parameters)) {
-            extract($parameters);
-        }
-        include $this->templateDir.$templateName.$this->ext;
+        return file_exists($this->templateDir.$viewPath.$this->ext);
+    }
 
-        return ob_get_clean();
+    public function render($viewPath, $parameters)
+    {
+        if ($this->viewExists($viewPath)) {
+            ob_start();
+            if (is_array($parameters)) {
+                extract($parameters);
+            }
+
+            include $this->templateDir.$viewPath.$this->ext;
+
+            return ob_get_clean();
+        }
+
+        return null;
     }
 
 }

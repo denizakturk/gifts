@@ -3,6 +3,9 @@
 use App\Kernel;
 use Gifts\HttpFoundation\Request;
 $debug = true;
+if($debug){
+    ini_set('opcache.enable', 'Off');
+}
 include "../vendor/autoload.php";
 
 try {

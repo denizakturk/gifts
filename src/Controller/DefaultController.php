@@ -4,6 +4,9 @@
 namespace App\Controller;
 
 
+use App\Repository\UserRepository;
+use Gifts\Security\Token;
+
 class DefaultController extends Controller
 {
 
@@ -14,7 +17,14 @@ class DefaultController extends Controller
 
     public function showGifts($id)
     {
-        echo "Hello {$id}";
+        /** @var UserRepository $userRepository */
+        $userRepository = $this->get(UserRepository::class);
+        /** @var Token $token */
+        $token = $this->get(Token::class);
+
+        $user = $userRepository->find($id);
+
+        return ['user' => $user];
     }
 
 }
