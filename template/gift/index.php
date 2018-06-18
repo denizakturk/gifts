@@ -1,6 +1,6 @@
-<form action="<?=$app->url('gift_send')?>" method="post">
-    <div class="col-12">
-        <h2>Gifts</h2>
+<div class="col-12">
+    <form action="<?= $app->url('gift_send') ?>" method="post">
+        <h2 class="text-center">Gifts</h2>
         <div class="row">
             <?php foreach ($gifts as $gift) { ?>
                 <div class="col-4">
@@ -13,8 +13,8 @@
                 </div>
             <?php } ?>
         </div>
-        <h2>Users</h2>
 
+        <h2 class="text-center">Users</h2>
         <div class="row">
             <?php foreach ($giftSendableUsers as $user) { ?>
                 <div class="col-4">
@@ -26,8 +26,8 @@
                 </div>
             <?php } ?>
         </div>
-        <div class="form-group">
+        <div class="form-group text-center">
             <button type="submit" class="btn btn-success">Send</button>
         </div>
-    </div>
-</form>
+    </form>
+</div>
