@@ -16,7 +16,7 @@ class ParameterBag
 
     public function has($key)
     {
-        return array_key_exists($key, $this->parameters);
+        return !empty($this->parameters) ? array_key_exists($key, $this->parameters) : false;
     }
 
     public function get($key, $default = null)
@@ -24,9 +24,16 @@ class ParameterBag
         return array_key_exists($key, $this->parameters) ? $this->parameters[$key] : $default;
     }
 
-    public function set($key, $value)
+    protected function set($key, $value)
     {
         $this->parameters[$key] = $value;
+    }
+
+    protected function unset($key)
+    {
+        if ($this->has($key)) {
+            unset($this->parameters[$key]);
+        }
     }
 
     public function all()

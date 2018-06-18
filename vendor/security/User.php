@@ -17,6 +17,16 @@ class User
      * @var string
      */
     public $name;
+
+    /**
+     * @var string
+     */
+    public $surname;
+
+    /**
+     * @var string
+     */
+    public $username;
     /**
      * @var string
      */
@@ -61,6 +71,38 @@ class User
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSurname(): string
+    {
+        return $this->surname;
+    }
+
+    /**
+     * @param string $surname
+     */
+    public function setSurname(string $surname): void
+    {
+        $this->surname = $surname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username): void
+    {
+        $this->username = $username;
     }
 
     /**

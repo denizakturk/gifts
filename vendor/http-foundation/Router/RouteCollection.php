@@ -11,9 +11,9 @@ class RouteCollection extends ParameterBag
 
     public function __construct(ParameterBag $routeConfig)
     {
-        foreach ($routeConfig->all() as $routerName => $routes) {
-            foreach ($routes as $requestUri => $route) {
-                $this->set($requestUri, new Route($requestUri, $route));
+        foreach ($routeConfig->all() as $clusterName => $routes) {
+            foreach ($routes as $name => $route) {
+                $this->set($name, new Route($name, $route));
             }
         }
     }

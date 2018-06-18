@@ -22,4 +22,18 @@ class UserRepository
         $this->entity = User::class;
         $this->entityManager = $entityManager;
     }
+
+    public function getGiftSendableUser($authUserId)
+    {
+        $sql = "SELECT * FROM user WHERE id != :authUserId";
+
+        /** @var \PDOStatement $pdoStatement */
+        $pdoStatement = $this->entityManager->connection->prepare($sql);
+
+        $pdoStatement->bindParam(':authUserId', $authUserId);
+
+        $pdoStatement->execute();
+
+        return $pdoStatement->fetchAll(\PDO::FETCH_CLASS, $this->entity);
+    }
 }

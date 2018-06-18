@@ -12,9 +12,25 @@ class Token extends ParameterBag
         parent::__construct($request->session->all());
     }
 
+    public function passwordAuthentication(User $user, $password)
+    {
+        if($user->password == md5($password)){
+            return true;
+        }
+
+        return false;
+    }
+
     public function getUser()
     {
         return ($this->has('user') ? unserialize($this->get('user')) : null);
+    }
+
+    public function isLogin()
+    {
+        $user = $this->getUser();
+
+        return $user instanceof User && $user->getId() > 0;
     }
 
     public function setUser(User $user)
@@ -22,9 +38,13 @@ class Token extends ParameterBag
         $this->set('user', serialize($user));
     }
 
+    public function logout()
+    {
+        $this->unset('user');
+    }
+
     public function __destruct()
     {
         $_SESSION = $this->all();
-        session_abort();
     }
 }

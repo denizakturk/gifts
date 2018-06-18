@@ -1,11 +1,13 @@
-<?php namespace App\Controller;
+<?php
+
+
+namespace App\Service;
 
 
 use Gifts\DependencyInjection\Container;
-use Gifts\HttpFoundation\Request;
 use Gifts\Security\Token;
 
-class Controller
+class Service
 {
     /**
      * @var Container
@@ -36,19 +38,5 @@ class Controller
     protected function set()
     {
         throw new \Exception('Not use settable');
-    }
-
-    protected function redirect($uri)
-    {
-        header('Location: '.$uri);
-        exit;
-    }
-
-    protected function redirectToReferrer()
-    {
-        /** @var Request $request */
-        $request = $this->get(Request::class);
-        $referrer = $request->server->get('HTTP_REFERER');
-        $this->redirect($referrer);
     }
 }

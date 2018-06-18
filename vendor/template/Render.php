@@ -33,8 +33,7 @@ class Render
 
             return ob_get_clean();
         }
-
-        return null;
+        throw new \Exception('View file not found');
     }
 
 }

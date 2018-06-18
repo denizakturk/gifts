@@ -26,14 +26,14 @@ class ControllerResolver
 
     public function requestParameterResolver(Request $request)
     {
-        $this->requestSegments = new ParameterBag(explode('/', trim($request->server->get('REQUEST_URI'), '/')));
+        $cleanRequestUri = explode('?', $request->server->get('REQUEST_URI'))[0];
+        $this->requestSegments = new RouteParameterBag(explode('/', trim($cleanRequestUri, '/')));
 
         return $this;
     }
 
     public function matchRouteToRequest()
     {
-
         /** @var Route $route */
         foreach ($this->routeCollection->all() as $route) {
             if ($route->getSegments()->count() == $this->requestSegments->count()) {

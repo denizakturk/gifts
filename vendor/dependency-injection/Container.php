@@ -8,6 +8,16 @@ class Container
 
     private $objects;
 
+    public function set($object)
+    {
+        $this->objects[get_class($object)] = $object;
+    }
+
+    public function has($class)
+    {
+        return array_key_exists($class, $this->objects);
+    }
+
     public function get($class)
     {
         $object = (!empty($this->objects[$class]) ? $this->objects[$class] : null);
@@ -24,11 +34,6 @@ class Container
         }
 
         return $object;
-    }
-
-    public function set($object)
-    {
-        $this->objects[get_class($object)] = $object;
     }
 
     protected function resolveInjectionParameter($class)

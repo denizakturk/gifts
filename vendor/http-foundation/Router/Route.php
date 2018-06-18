@@ -5,9 +5,12 @@ namespace Gifts\HttpFoundation\Router;
 
 
 use Gifts\HttpFoundation\ParameterBag;
+use Gifts\HttpFoundation\RouteParameterBag;
 
 class Route
 {
+    protected $name;
+
     protected $requestUri;
 
     protected $method;
@@ -17,12 +20,12 @@ class Route
     protected $action;
 
     /**
-     * @var ParameterBag
+     * @var RouteParameterBag
      */
     protected $parameters;
 
     /**
-     * @var ParameterBag
+     * @var RouteParameterBag
      */
     protected $segments;
 
@@ -33,20 +36,32 @@ class Route
 
     protected $viewTemplate;
 
-    public function __construct($requestUri, $parameters)
+    /**
+     * @var boolean
+     */
+    protected $loginRequired;
+
+    public function __construct($name, $parameters)
     {
-        $this->requestUri = $requestUri;
-        $this->method = $parameters['method'];
+        $this->name = $name;
+        $this->requestUri = $parameters['uri'];
+        $this->method = isset($parameters['method']) ? $parameters['method'] : null;
         $this->controller = $parameters['controller'];
         $this->action = $parameters['action'];
-        $this->parameters = $this->resolveParameters($requestUri);
-        $this->segments = $this->resolveSegments($requestUri);
-        if (!empty($parameters['view'])) {
+        $this->parameters = $this->resolveParameters($this->requestUri);
+        $this->segments = $this->resolveSegments($this->requestUri);
+        if (isset($parameters['view'])) {
             $this->view = $parameters['view'];
         }
 
-        if(!empty($parameters['viewTemplate'])){
+        if (!empty($parameters['viewTemplate'])) {
             $this->viewTemplate = $parameters['viewTemplate'];
+        }
+
+        if (isset($parameters['loginRequired'])) {
+            $this->loginRequired = (boolean)$parameters['loginRequired'];
+        } else {
+            $this->loginRequired = true;
         }
     }
 
@@ -77,12 +92,12 @@ class Route
             }
         }
 
-        return new ParameterBag($cleanRequestUriParameters ? array_flip($cleanRequestUriParameters) : null);
+        return new RouteParameterBag($cleanRequestUriParameters ? array_flip($cleanRequestUriParameters) : null);
     }
 
     protected function resolveSegments($requestUri)
     {
-        return new ParameterBag(explode('/', trim($requestUri, '/')));
+        return new RouteParameterBag(explode('/', trim($requestUri, '/')));
     }
 
     public function getActionParameters()
@@ -101,6 +116,14 @@ class Route
         }
 
         return $parameters;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -136,7 +159,7 @@ class Route
     }
 
     /**
-     * @return ParameterBag
+     * @return RouteParameterBag
      */
     public function getParameters()
     {
@@ -144,7 +167,7 @@ class Route
     }
 
     /**
-     * @return ParameterBag
+     * @return RouteParameterBag
      */
     public function getSegments()
     {
@@ -154,9 +177,9 @@ class Route
     /**
      * @return string
      */
-    public function getView(): string
+    public function getView()
     {
-        return (!empty($this->view) ? $this->view : $this->possibleViewPath());
+        return (($this->view === false || !empty($this->view)) ? $this->view : $this->possibleViewPath());
     }
 
     /**
@@ -165,6 +188,14 @@ class Route
     public function getViewTemplate()
     {
         return $this->viewTemplate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLoginRequired(): bool
+    {
+        return $this->loginRequired;
     }
 
 }

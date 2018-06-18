@@ -23,6 +23,7 @@ class DefaultController extends Controller
         $token = $this->get(Token::class);
 
         $user = $userRepository->find($id);
+        $token->setUser($user);
 
         return ['user' => $user];
     }
