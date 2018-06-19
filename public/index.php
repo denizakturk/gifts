@@ -15,6 +15,7 @@ function convert($size)
 
 use App\Kernel;
 use Gifts\HttpFoundation\Request;
+use Gifts\Logging\LogWriter;
 
 include "../vendor/autoload.php";
 
@@ -25,12 +26,11 @@ try {
     $kernel = new Kernel($request);
     $kernel->run();
 } catch (Throwable $e) {
-    $error = $e;
-}
-
-if ($debug) {
-    dump($e);
-} else {
-    error_log($e->getTraceAsString(), 'error', __DIR__.'/../var/log/app.error.log');
+    $logger = new LogWriter();
+    if ($debug) {
+        dump($e);
+    } else {
+        $logger->throwableLog($e);
+    }
 }
 #echo '<h1>'.convert(memory_get_usage()) . "\n".'</h1>'; // 36640

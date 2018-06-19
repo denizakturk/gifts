@@ -28,7 +28,7 @@ return [
             'controller' => \App\Controller\GiftController::class,
             'action' => 'send',
             'method' => ['POST'],
-            'view' => false
+            'view' => false,
         ],
     ],
     'member' => [
@@ -38,11 +38,24 @@ return [
             'action' => 'index',
             'method' => ['GET'],
         ],
+        'member_giftbox' => [
+            'uri' => '/member/giftbox',
+            'controller' => \App\Controller\MemberController::class,
+            'action' => 'giftbox',
+            'method' => ['GET'],
+        ],
+        'member_giftapproved' => [
+            'uri' => '/member/gift/approved',
+            'controller' => \App\Controller\MemberController::class,
+            'action' => 'giftApproved',
+            'method' => ['POST'],
+            'view' => false,
+        ],
     ],
     'general' => [
         'home' => [
             'uri' => '/',
-            'controller' => \App\Controller\DefaultController::class,
+            'controller' => \App\Controller\MemberController::class,
             'action' => 'index',
         ],
     ],
@@ -65,6 +78,15 @@ return [
             'uri' => '/security/logout',
             'controller' => \App\Controller\SecurityController::class,
             'action' => 'logout',
+            'method' => ['GET'],
+            'loginRequired' => false,
+        ],
+    ],
+    'api' => [
+        'gift_expire' => [
+            'uri' => '/api/expire-gifts',
+            'controller' => \App\Controller\Api\CleanController::class,
+            'action' => 'expireGifts',
             'method' => ['GET'],
             'loginRequired' => false,
         ],

@@ -20,4 +20,23 @@ header {
 .gift {
     background-color: #dddddd;
     margin-bottom: 15px;
+    padding:15px;
+}
+
+img#logo {
+    width: 45px;
+    height: 45px;
+}
+a.brand {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.slogan {
+    margin-top: 10px;
+}
+
+img.gift {
+    width: 120px;
+    height: 120px;
 }

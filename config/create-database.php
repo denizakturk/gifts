@@ -46,7 +46,7 @@ mysqli_query(
   `updated_at` datetime DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;"
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;"
 );
 
 
@@ -54,7 +54,8 @@ mysqli_query($con, "INSERT INTO `user` (`id`, `name`, `surname`, `username`, `em
 VALUES
 	(1, 'jhon', 'moon', 'jhon.moon', 'jhon.moon@gifts.com', '827ccb0eea8a706c4c34a16891f84e7b', '2018-06-14 20:35:10', NULL, NULL),
 	(2, 'jessy', 'moon', 'jessy.moon', 'jessy.moon@gifts.com', '827ccb0eea8a706c4c34a16891f84e7b', '2018-06-14 20:35:10', NULL, NULL),
-	(3, 'jimmy', 'moon', 'jimmy.moon', 'jimmy.moon@gifts.com', '827ccb0eea8a706c4c34a16891f84e7b', '2018-06-14 20:35:10', NULL, NULL);
+	(3, 'jimmy', 'moon', 'jimmy.moon', 'jimmy.moon@gifts.com', '827ccb0eea8a706c4c34a16891f84e7b', '2018-06-14 20:35:10', NULL, NULL),
+	(4, 'jully', 'moon', 'jully.moon', 'jully.moon@gifts.com', '827ccb0eea8a706c4c34a16891f84e7b', '2018-06-14 20:35:10', NULL, NULL);
 ");
 
 mysqli_query($con, "INSERT INTO `gift` (`id`, `name`, `slug`, `created_at`, `updated_at`, `deleted`)

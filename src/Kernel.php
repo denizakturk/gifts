@@ -100,7 +100,7 @@ class Kernel
         /** @var Route $route */
         $route = $controllerResolver->requestParameterResolver($request)->matchRouteToRequest();
         if (!$route instanceof Route) {
-            throw new RouteNotFoundException();
+            throw new RouteNotFoundException($request->server->get('REQUEST_URI'));
         }
 
         return $route;

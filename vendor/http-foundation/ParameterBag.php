@@ -43,7 +43,7 @@ class ParameterBag
 
     public function count()
     {
-        return count($this->parameters);
+        return !is_null($this->parameters) ? count($this->parameters) : 0;
     }
 
     public function getKeys()

@@ -31,12 +31,16 @@ class SocialUserService extends Service
 
         $sentGifts = $this->giftSentRepository->getSentByApproved($weekStart, $weekEnd);
         $userGifts = [];
+
         foreach ($sentGifts as $gift) {
-            if (!isset($sentGifts[$gift['recipientName']])) {
+            if (!isset($userGifts[$gift['recipientName']])) {
                 $userGifts[$gift['recipientName']] = 1 * 100;
+            } else {
+                $userGifts[$gift['recipientName']] += (1 * 100);
             }
-            $userGifts[$gift['recipientName']] += 1 * 100;
         }
+
+        arsort($userGifts);
 
         return $userGifts;
     }
