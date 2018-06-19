@@ -37,7 +37,7 @@ class GiftController extends Controller
         $this->giftRepository = $this->get(GiftRepository::class);
         $this->userRepository = $this->get(UserRepository::class);
 
-        $gifts = $this->giftRepository->findAll();
+        $gifts = $this->giftRepository->getAll();
 
         $giftSendableUsers = $this->userRepository->getGiftSendableUser($this->getUser()->getId());
 

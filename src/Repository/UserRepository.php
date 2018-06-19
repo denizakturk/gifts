@@ -4,6 +4,8 @@
 namespace App\Repository;
 
 
+use App\Utility\Cache;
+use App\Utility\Constants;
 use Gifts\Database\EntityManager;
 use Gifts\Database\RepositoryTrait;
 use Gifts\Security\User;
@@ -25,15 +27,25 @@ class UserRepository
 
     public function getGiftSendableUser($authUserId)
     {
-        $sql = "SELECT * FROM user WHERE id != :authUserId";
+        $cacheKey = sprintf(Constants::SENDABLE_USER_CACHE_KEY, $authUserId);
 
-        /** @var \PDOStatement $pdoStatement */
-        $pdoStatement = $this->entityManager->connection->prepare($sql);
+        $result = Cache::get($cacheKey);
 
-        $pdoStatement->bindParam(':authUserId', $authUserId);
+        if (empty($result)) {
 
-        $pdoStatement->execute();
+            $sql = "SELECT * FROM user WHERE id != :authUserId";
 
-        return $pdoStatement->fetchAll(\PDO::FETCH_CLASS, $this->entity);
+            /** @var \PDOStatement $pdoStatement */
+            $pdoStatement = $this->entityManager->connection->prepare($sql);
+
+            $pdoStatement->bindParam(':authUserId', $authUserId);
+
+            $pdoStatement->execute();
+            $result = $pdoStatement->fetchAll(\PDO::FETCH_CLASS, $this->entity);
+
+            Cache::set($cacheKey, $result);
+        }
+
+        return $result;
     }
 }

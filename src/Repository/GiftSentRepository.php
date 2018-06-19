@@ -7,6 +7,8 @@ namespace App\Repository;
 use App\Entity\Gift;
 use App\Entity\GiftSent;
 use App\Model\GiftSentModel;
+use App\Utility\Cache;
+use App\Utility\Constants;
 use Gifts\Database\EntityManager;
 use Gifts\Database\RepositoryTrait;
 use Gifts\Security\User;
@@ -34,6 +36,12 @@ class GiftSentRepository
 
     public function isSendable(User $sender, User $recipient)
     {
+        $cacheKey = sprintf(Constants::SENDABLE_CACHE_KEY, $sender->getId(), $recipient->getId());
+
+        if(Cache::get($cacheKey) > 0){
+            return false;
+        }
+
         $now = new \DateTime();
 
         $sql = "SELECT COUNT(gs.id) FROM gift_sent gs
@@ -54,7 +62,11 @@ class GiftSentRepository
         $pdoStatement->bindParam(':startDate', $now->format('Y-m-d H:i:s'));
         $pdoStatement->execute();
 
-        return !$pdoStatement->fetchColumn();
+        $sendGiftCount = $pdoStatement->fetchColumn();
+
+        Cache::set($cacheKey, $sendGiftCount, Constants::CACHE_TIMEOUT_ONE_DAY);
+
+        return !$sendGiftCount;
     }
 
     public function send(User $sender, User $recipient, Gift $gift)
