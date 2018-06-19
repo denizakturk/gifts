@@ -1,10 +1,13 @@
 <?php
 
+echo "\nBEGIN CREATE DATABSE\n";
 
 $con = mysqli_connect("localhost", "root", "vagrant");
 
 mysqli_query($con, "CREATE DATABASE gifts");
 
+mysqli_query($con, "USE gifts");
+echo "\nCREATED DATABSE\n";
 mysqli_query(
     $con,
     "CREATE TABLE `gift` (
@@ -49,6 +52,7 @@ mysqli_query(
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;"
 );
 
+echo "\nCREATED TABLES\n";
 
 mysqli_query($con, "INSERT INTO `user` (`id`, `name`, `surname`, `username`, `email`, `password`, `created_at`, `updated_at`, `deleted`)
 VALUES
@@ -66,3 +70,6 @@ VALUES
 	(4, 'Gold', 'gold', '2018-06-17 19:37:59', NULL, NULL);
 ");
 
+echo "\nINSERTED DATA\n";
+
+echo "\nEND\n";
