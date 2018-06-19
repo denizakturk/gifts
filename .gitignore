@@ -1,4 +1,4 @@
 .idea
-var/log/*
+var/log/*.log
 vendor/composer
 vendor/autoload.php
