@@ -32,7 +32,11 @@ mysqli_query(
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `sender_id` (`sender_id`),
+  KEY `gift_id` (`gift_id`),
+  KEY `recipient_id` (`recipient_id`),
+  KEY `created_at` (`created_at`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;"
 );
 
@@ -48,7 +52,8 @@ mysqli_query(
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;"
 );
 
