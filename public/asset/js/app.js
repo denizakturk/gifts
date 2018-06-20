@@ -43,30 +43,29 @@ $(document).ready(function () {
             url: '/member/gift/approved',
             data: {"approve_id": approve_id, "approved": approved},
             beforeSend: function () {
-                // setting a timeout
-                /*$('#gift-send-button').addClass('disabled');
-                $('#gift-send-button').attr('disabled', 'disabled');*/
+                $('button.approve').addClass('disabled');
+                $('button.approve').attr('disabled', 'disabled');
             },
             success: function (data) {
                 var response = JSON.parse(data)
 
                 if (response.status) {
-                    alert('Successful')
+                    alert('Successful');
+                    $('#gift-'+approve_id).remove();
                 } else {
                     alert('Error!');
                 }
-
-                /*$('#gift-send-button').removeClass('disabled');
-                $('#gift-send-button').removeAttr('disabled');*/
+                $('button.approve').removeClass('disabled');
+                $('button.approve').removeAttr('disabled', 'disabled');
             },
             error: function (xhr) {
-                /*$('#gift-send-button').removeClass('disabled');
-                $('#gift-send-button').removeAttr('disabled');*/
+                $('button.approve').removeClass('disabled');
+                $('button.approve').removeAttr('disabled', 'disabled');
                 alert('Error!');
             },
             complete: function () {
-                /*$('#gift-send-button').removeClass('disabled');
-                $('#gift-send-button').removeAttr('disabled');*/
+                $('button.approve').removeClass('disabled');
+                $('button.approve').removeAttr('disabled', 'disabled');
             },
             dataType: 'html'
         });

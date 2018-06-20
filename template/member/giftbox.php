@@ -6,7 +6,7 @@
             /** @var \App\Model\GiftSentModel $giftSent */
             foreach ($unapprovedGifts as $giftSent) {
                 ?>
-                <div class="col-4">
+                <div class="col-4" id="gift-<?=$giftSent->getId()?>">
                     <div class="gift text-center">
                         <label>
                             Sent to <?= $giftSent->getSenderName() ?>
