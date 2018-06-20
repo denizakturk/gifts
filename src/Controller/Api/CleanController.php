@@ -22,7 +22,8 @@ class CleanController extends Controller
         parent::__construct($container);
         /** @var Request $request */
         $request = $this->get(Request::class);
-        if ($request->server->get('REMOTE_ADDR') != '127.0.0.1') {
+        if (!in_array($request->server->get('REMOTE_ADDR'), ['192.168.20.100', '127.0.0.1'])) {
+            echo $request->server->get('REMOTE_ADDR');
             throw new \Exception('Bad Request');
         }
     }

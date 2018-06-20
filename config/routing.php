@@ -88,6 +88,7 @@ return [
             'controller' => \App\Controller\Api\CleanController::class,
             'action' => 'expireGifts',
             'method' => ['GET'],
+            'view' => false,
             'loginRequired' => false,
         ],
     ],
